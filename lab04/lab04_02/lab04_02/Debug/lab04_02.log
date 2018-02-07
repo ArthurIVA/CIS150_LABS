@@ -1,0 +1,2 @@
+﻿  Source.cpp
+c:\users\arthuriva\google drive\umdearborn\winter 2018\cis 150\lab04\lab04_02\lab04_02\source.cpp(16): error C4700: uninitialized local variable 'grade' used
