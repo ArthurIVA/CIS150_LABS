@@ -2,7 +2,7 @@
 *Author:			Arthur Aigeltinger IV
 *Creation Date:		02/11/18
 *Modification Date:	02/11/18
-*Purpose: 
+*Purpose: Test 0404_int_exception branch.
 */
 
 #include <iostream>
