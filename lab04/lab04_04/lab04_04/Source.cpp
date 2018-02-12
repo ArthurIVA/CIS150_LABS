@@ -2,11 +2,10 @@
 *Author:			Arthur Aigeltinger IV
 *Creation Date:		02/11/18
 *Modification Date:	02/11/18
-*Purpose: 
+*Purpose: Generate pseudo-random number which becomes the number of numbers to add in a number loop of loops.
 */
 
 #include <iostream>
-#include <cctype> //Help with user loop selection by handling UPPER case inputs.
 #include <ctime> //Create seed based on RTC for number of inputs.
 
 using namespace std;
