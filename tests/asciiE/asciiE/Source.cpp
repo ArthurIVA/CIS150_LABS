@@ -17,8 +17,8 @@
 using namespace std;
 
 // Function prototypes go here - BEFORE the main
-void drawHorizontal();
-void drawVertical();
+void drawHorizontal(char userChar); //userChar does not need to be identified here, just type char.
+void drawVertical(char userChar);  // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 /*
 *Author:			Arthur Aigeltinger IV
@@ -29,13 +29,19 @@ void drawVertical();
 
 int main()
 {
+
+	char userChar;
+
 	cout << endl;
 
-	drawHorizontal();
-	drawVertical();
-	drawHorizontal();
-	drawVertical();
-	drawHorizontal();
+	cout << "Please enter the basic character to be displayed to make a giant 'E' : ";
+	cin >> userChar;
+
+	drawHorizontal(userChar);
+	drawVertical(userChar);
+	drawHorizontal(userChar);
+	drawVertical(userChar);
+	drawHorizontal(userChar);
 
 	cout << endl;
 
@@ -43,19 +49,33 @@ int main()
 	return 0;
 }
 
-void drawHorizontal() // display the horizontal line of 10 asterisks
+/*
+*Author:			Arthur Aigeltinger IV
+*Creation Date:		02/15/18
+*Modification Date:	02/15/18
+*Purpose: Display the horizontal line of 10 asterisks
+*/
+
+void drawHorizontal(char userChar)
 {
 	for (int i = 0; i < 10; i++)
 	{
-		cout << "*";
+		cout << userChar;
 	}
 	cout << endl;
 }
 
-void drawVertical() // displays the vertical line of 4 asterisks
+/*
+*Author:			Arthur Aigeltinger IV
+*Creation Date:		02/15/18
+*Modification Date:	02/15/18
+*Purpose: Displays the vertical line of 4 asterisks
+*/ 
+
+void drawVertical(char userChar)
 {
 	for (int i = 0; i < 3; i++)
 	{
-		cout << "*" << endl;
+		cout << userChar << endl;
 	}
 }
