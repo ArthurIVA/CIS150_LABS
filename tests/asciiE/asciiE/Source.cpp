@@ -16,22 +16,9 @@
 
 using namespace std;
 
-void drawHorizontal() // display the horizontal line of 10 asterisks
-{
-	for (int i = 0; i < 10; i++)
-	{
-		cout << "*";
-	}
-	cout << endl;
-}
-
-void drawVertical() // displays the vertical line of 4 asterisks
-{
-	for (int i = 0; i < 3; i++)
-	{
-		cout << "*" << endl;
-	}
-}
+// Function prototypes go here - BEFORE the main
+void drawHorizontal();
+void drawVertical();
 
 /*
 *Author:			Arthur Aigeltinger IV
@@ -54,4 +41,21 @@ int main()
 
 	system("pause");
 	return 0;
+}
+
+void drawHorizontal() // display the horizontal line of 10 asterisks
+{
+	for (int i = 0; i < 10; i++)
+	{
+		cout << "*";
+	}
+	cout << endl;
+}
+
+void drawVertical() // displays the vertical line of 4 asterisks
+{
+	for (int i = 0; i < 3; i++)
+	{
+		cout << "*" << endl;
+	}
 }
