@@ -52,7 +52,7 @@ int subtraction(int a, int b)
 
 void directions()
 {
-	cout << "******************************************************************************" << endl
+	cout << "*******************************************************************************" << endl
 		 << "Hello!" << endl
 		 << "This Program asks the user for two integers, then prints the sum and difference" << endl
 		 << "*******************************************************************************" << endl << endl;
