@@ -65,6 +65,12 @@ int main()
 	return 0;
 }
 
+/*
+*Function Author: PROVIDED - Better Formatting: Arthur Aigeltinger IV
+*Creation Date: 02/20/18
+*Modification Date:	02/20/18
+*Purpose: Provides template for initial menu.
+*/
 void menu()
 {
 	cout << "-----------------------------------------------------------" << endl
@@ -79,16 +85,34 @@ void menu()
 		<< "-----------------------------------------------------------" << endl;
 }
 
+/*
+*Function Author: Arthur Aigeltinger IV
+*Creation Date: 02/20/18
+*Modification Date:	02/20/18
+*Purpose: Informs user of invalid input.
+*/
 void errorMessage()
 {
 	cout << "Invalid Entry, Try Again." << endl;
 }
 
+/*
+*Function Author: Arthur Aigeltinger IV
+*Creation Date: 02/20/18
+*Modification Date:	02/20/18
+*Purpose: Prints exit message
+*/
 void exitMessage()
 {
 	cout << endl << "Thank you for using this program!" << endl;
 }
 
+/*
+*Function Author: Arthur Aigeltinger IV
+*Creation Date: 02/20/18
+*Modification Date:	02/20/18
+*Purpose: Finds max of two integers
+*/
 void maxInt()
 {
 	cout << endl << "Please provide the first number: ";
@@ -106,6 +130,12 @@ void maxInt()
 	}
 }
 
+/*
+*Function Author: Arthur Aigeltinger IV
+*Creation Date: 02/20/18
+*Modification Date:	02/20/18
+*Purpose: Finds min of two integers
+*/
 void minInt()
 {
 	cout << endl << "Please provide the first number: ";
