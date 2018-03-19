@@ -1,0 +1,4 @@
+John Smith's Weekly Salary = $150
+Sarah Johnson's Weekly Salary = $480
+Mary Taylor's Weekly Salary = $351
+Jim Stewart's Weekly Salary = $200

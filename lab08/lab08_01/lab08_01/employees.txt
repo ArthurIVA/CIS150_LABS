@@ -1,0 +1,4 @@
+John  Smith   10 15
+Sarah Johnson 40 12
+Mary  Taylor  27 13
+Jim   Stewart 25 8
