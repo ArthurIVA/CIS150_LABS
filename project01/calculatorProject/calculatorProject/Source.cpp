@@ -198,11 +198,11 @@ int main()
 			{
 				cout << "Please provide the first number: ";
 				cin >> input;
-				num1 = verifyNum(input, true);
+				num1 = verifyNum(input, false);
 
 				cout << "Please provide the second number: ";
 				cin >> input;
-				num2 = verifyNum(input, true);
+				num2 = verifyNum(input, false);
 
 				cout << "Operation: LCM of " << num1 << " & " << num2 << " = " << computeLCM(num1, num2) << endl;
 
@@ -215,11 +215,11 @@ int main()
 			{
 				cout << "Please provide the first number: ";
 				cin >> input;
-				num1 = verifyNum(input, true);
+				num1 = verifyNum(input, false);
 
 				cout << "Please provide the second number: ";
 				cin >> input;
-				num2 = verifyNum(input, true);
+				num2 = verifyNum(input, false);
 
 				cout << "Operation: GCD of " << num1 << " & " << num2 << " = " << computeGCD(num1, num2) << endl;
 
@@ -232,11 +232,11 @@ int main()
 			{
 				cout << "Please provide the first number: ";
 				cin >> input;
-				num1 = verifyNum(input, true);
+				num1 = verifyNum(input, false);
 
 				cout << "Please provide the second number: ";
 				cin >> input;
-				num2 = verifyNum(input, true);
+				num2 = verifyNum(input, false);
 
 				cout << "Operation: " << num1 << " modulus " << num2 << " = " << computeMod(num1, num2) << endl;
 
