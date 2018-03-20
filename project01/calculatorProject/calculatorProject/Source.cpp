@@ -36,19 +36,19 @@ int main()
 	char choice = 0;
 	float num1 = 0.0; 
 	float num2 = 0.0;
-	const string exe = "Executed";
-	const string nonExe = "Function Skipped";
+	const string EXE = "Executed";
+	const string NONEXE = "Function Skipped";
 	string input = "";
-	string didSum = nonExe;
-	string didSub = nonExe;
-	string didMul = nonExe;
-	string didDiv = nonExe;
-	string didRoot= nonExe;
-	string didPow = nonExe;
-	string didPer = nonExe;
-	string didLCM = nonExe;
-	string didGCD = nonExe;
-	string didMod = nonExe;
+	string didSum = NONEXE;
+	string didSub = NONEXE;
+	string didMul = NONEXE;
+	string didDiv = NONEXE;
+	string didRoot= NONEXE;
+	string didPow = NONEXE;
+	string didPer = NONEXE;
+	string didLCM = NONEXE;
+	string didGCD = NONEXE;
+	string didMod = NONEXE;
 
 
 	menu(); //Draw initial menu.
@@ -74,7 +74,7 @@ int main()
 
 				cout  << "Operation: " << num1 << " + " << num2 << " = " << computeSum(num1, num2) << endl;
 
-				didSum = exe;
+				didSum = EXE;
 				choice = 0; //Reset choice to return to decision stage.
 				break;
 			}
@@ -91,7 +91,7 @@ int main()
 
 				cout << "Operation: " << num1 << " - " << num2 << " = " << computeSub(num1, num2) << endl;
 
-				didSub = exe;
+				didSub = EXE;
 				choice = 0; //Reset choice to return to decision stage.
 				break;
 			}
@@ -108,7 +108,7 @@ int main()
 
 				cout << "Operation: " << num1 << " * " << num2 << " = " << computeMul(num1, num2) << endl;
 
-				didMul = exe;
+				didMul = EXE;
 				choice = 0; //Reset choice to return to decision stage.
 				break; 
 			}
@@ -129,7 +129,7 @@ int main()
 
 				cout << "Operation: " << num1 << " / " << num2 << " = " << computeDiv(num1, num2) << endl;
 
-				didDiv = exe;
+				didDiv = EXE;
 				choice = 0; //Reset choice to return to decision stage.
 				break;
 			}
@@ -149,7 +149,7 @@ int main()
 
 				cout << "Operation: " << num2 << " root " << num1 << " = " << computeRoot(num1, num2) << endl;
 
-				didRoot = exe;
+				didRoot = EXE;
 				choice = 0; //Reset choice to return to decision stage.
 				break;
 			}
@@ -169,7 +169,7 @@ int main()
 
 				cout << "Operation: " << num2 << " power of " << num1 << " = " << computePower(num1, num2) << endl;
 
-				didPow = exe;
+				didPow = EXE;
 				choice = 0; //Reset choice to return to decision stage.
 				break;
 			}
@@ -189,7 +189,7 @@ int main()
 
 				cout << "Operation: " << num2 << "% of " << num1 << " = " << computePerc(num1, num2) << endl;
 
-				didPer = exe;
+				didPer = EXE;
 				choice = 0; //Reset choice to return to decision stage.
 				break;
 			}
@@ -206,7 +206,7 @@ int main()
 
 				cout << "Operation: LCM of " << num1 << " & " << num2 << " = " << computeLCM(num1, num2) << endl;
 
-				didLCM = exe;
+				didLCM = EXE;
 				choice = 0; //Reset choice to return to decision stage.
 				break;
 			}
@@ -223,11 +223,11 @@ int main()
 
 				cout << "Operation: GCD of " << num1 << " & " << num2 << " = " << computeGCD(num1, num2) << endl;
 
-				didGCD = exe;
+				didGCD = EXE;
 				choice = 0; //Reset choice to return to decision stage.
 				break; 
 			}
-			//Modulous
+			//Modulus
 			case 'J':
 			{
 				cout << "Please provide the first number: ";
@@ -238,9 +238,9 @@ int main()
 				cin >> input;
 				num2 = verifyNum(input, true);
 
-				cout << "Operation: " << num1 << " modulous " << num2 << " = " << computeMod(num1, num2) << endl;
+				cout << "Operation: " << num1 << " modulus " << num2 << " = " << computeMod(num1, num2) << endl;
 
-				didMod = exe;
+				didMod = EXE;
 				choice = 0; //Reset choice to return to decision stage.
 				break;
 			}
@@ -277,6 +277,12 @@ int main()
 	return 0;
 }
 
+/*
+*Function Author: Arthur Aigeltinger IV
+*Creation Date:		03/19/18
+*Modification Date:	03/19/18
+*Purpose: Print default menu.
+*/
 void menu()
 {
 	cout << "----------------------------------------------------------------------"	<< endl;
@@ -299,16 +305,34 @@ void menu()
 	cout << "----------------------------------------------------------------------"	<< endl;
 }
 
+/*
+*Function Author: Arthur Aigeltinger IV
+*Creation Date:		03/19/18
+*Modification Date:	03/19/18
+*Purpose: Print exit message.
+*/
 void exitMessage()
 {
 	cout << "Thank you for using this calculator program!" << endl;
 }
 
+/*
+*Function Author: Arthur Aigeltinger IV
+*Creation Date:		03/19/18
+*Modification Date:	03/19/18
+*Purpose: Default error message for handling in the future.
+*/
 void errorMessage()
 {
 	//Left in for modularity purposes.
 }
 
+/*
+*Function Author: Arthur Aigeltinger IV
+*Creation Date:		03/19/18
+*Modification Date:	03/19/18
+*Purpose: Print execution page.
+*/
 void functionExecutions(string& didSum, string& didSub, string& didMul, string& didDiv, string& didRoot, string& didPow, string& didPer, string& didLCM, string& didGCD, string& didMod)
 {
 	system("CLS"); //As mentioned, DO NOT DO THIS IN THE FUTURE.
@@ -337,7 +361,7 @@ void functionExecutions(string& didSum, string& didSub, string& didMul, string& 
 *Function Author: Arthur Aigeltinger IV
 *Creation Date:		03/19/18
 *Modification Date:	03/19/18
-*Purpose:
+*Purpose: Add
 */
 float computeSum(float num1, float num2)
 {
@@ -348,7 +372,7 @@ float computeSum(float num1, float num2)
 *Function Author: Arthur Aigeltinger IV
 *Creation Date:		03/19/18
 *Modification Date:	03/19/18
-*Purpose:
+*Purpose: Subtract
 */
 float computeSub(float num1, float num2)
 {
@@ -359,7 +383,7 @@ float computeSub(float num1, float num2)
 *Function Author: Arthur Aigeltinger IV
 *Creation Date:		03/19/18
 *Modification Date:	03/19/18
-*Purpose:
+*Purpose: Multiply
 */
 float computeMul(float num1, float num2)
 {
@@ -370,7 +394,7 @@ float computeMul(float num1, float num2)
 *Function Author: Arthur Aigeltinger IV
 *Creation Date:		03/19/18
 *Modification Date:	03/19/18
-*Purpose:
+*Purpose: Divide
 */
 float computeDiv(float num1, float num2)
 {
@@ -381,7 +405,7 @@ float computeDiv(float num1, float num2)
 *Function Author: PROVIDED
 *Creation Date:	Unknown
 *Modification Date:	03/19/18
-*Purpose:
+*Purpose: Do root.
 */
 float computeRoot(float root, int index)
 {
@@ -474,7 +498,7 @@ int   computeGCD(int a, int b)
 *Function Author: Arthur Aigeltinger IV
 *Creation Date:		03/19/18
 *Modification Date:	03/19/18
-*Purpose: Compute modulous.
+*Purpose: Compute modulus.
 */
 int   computeMod(int num1, int num2)
 {
@@ -487,6 +511,7 @@ int   computeMod(int num1, int num2)
 *Modification Date:	03/12/18
 *Purpose: Checks for valid integer input OR double/int input via string.
 *Dependencies: #include <cctype>, #include <string>
+*
 //Original Example of verifyNum()
 std::string input = "";
 int num = 0;
