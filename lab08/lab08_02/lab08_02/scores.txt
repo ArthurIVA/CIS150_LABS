@@ -1,0 +1,5 @@
+John Smith 99
+Sarah Johnson   85
+Jim Robinson    70
+Mary Anderson   100
+Michael Jackson 92

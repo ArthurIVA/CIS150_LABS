@@ -1,0 +1,4 @@
+15 10 Smith   John
+12 40 Johnson Sarah
+13 27 Taylor  Mary
+8  25 Stewart Jim

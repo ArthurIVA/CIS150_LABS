@@ -2,11 +2,10 @@
 *Author:			Arthur Aigeltinger IV
 *Creation Date:		02/11/18
 *Modification Date:	02/11/18
-*Purpose: Test 0404_int_exception branch.
+*Purpose: Decided that this issue was resolved in later labs, closing pull request.
 */
 
 #include <iostream>
-#include <cctype> //Help with user loop selection by handling UPPER case inputs.
 #include <ctime> //Create seed based on RTC for number of inputs.
 
 using namespace std;
