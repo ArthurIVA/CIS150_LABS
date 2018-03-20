@@ -2,7 +2,7 @@
 *Author:			Arthur Aigeltinger IV
 *Creation Date:		02/11/18
 *Modification Date:	02/11/18
-*Purpose: Generate pseudo-random number which becomes the number of numbers to add in a number loop of loops.
+*Purpose: Decided that this issue was resolved in later labs, closing pull request.
 */
 
 #include <iostream>
