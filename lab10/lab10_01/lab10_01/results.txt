@@ -1,0 +1,5 @@
+Highest Grade - 98.20 - Anthony Stark
+Lowest  Grade - 42.00 - Caleb Cameron
+Average Grade - 77.500
+
+Number of Students Processed - 7

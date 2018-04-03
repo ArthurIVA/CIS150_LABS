@@ -1,0 +1,7 @@
+007 James Bond 82.0
+001 Steve Rogers 85.5
+042 Anthony Stark 98.2
+062 Phillip Coulson 84.6
+017 James Barnes 83.0
+666 Caleb Cameron 42.0
+360 Michael Lilley 67.2
