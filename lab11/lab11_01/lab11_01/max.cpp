@@ -6,7 +6,6 @@
 *Modification Date:	04/08/18
 *Purpose: Take in array of object triangle with size and determine largest of the set.
 */
-/*
 int maxTriangle(triangle arrTri[], int size)
 {
 	int indexLargest = 0;
@@ -23,4 +22,3 @@ int maxTriangle(triangle arrTri[], int size)
 
 	return indexLargest;
 }
-*/
