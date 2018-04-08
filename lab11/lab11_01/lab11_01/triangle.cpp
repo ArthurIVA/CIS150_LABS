@@ -1,5 +1,4 @@
 #include "triangle.h"
-#include "max.h"
 
 /*
 *Function Author: Arthur Aigeltinger IV
