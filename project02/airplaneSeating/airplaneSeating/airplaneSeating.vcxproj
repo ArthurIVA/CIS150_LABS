@@ -115,7 +115,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="drawMenu.cpp" />
+    <ClCompile Include="loadSeatChart.cpp" />
+    <ClCompile Include="printSeatChart.cpp" />
     <ClCompile Include="source.cpp" />
+    <ClCompile Include="verifyNum.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
