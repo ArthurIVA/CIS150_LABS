@@ -100,19 +100,87 @@ int main()
 
 void reserveSeat(char seatArray[][NCOLS], int NROWS)
 {
+	//Define input and choice variables
 	std::string input = "";
+	int rowChoice = -1; //When rowChoice is -1, seat is invalid.
+	int colChoice;
+	char seatChoice = ' ';
 
+	//Query for input.
 	std::cout << "Please Enter Seat to Reserve [1A, 4C, 6D, etc]: ";
 	std::cin >> input;
-	if (input[1] == '\0')
+
+	//Check input lengths and type validity.
+	if (isdigit(input[0]) && isdigit(input[1]))
 	{
-		std::cout << "INPUT LENGTH TOO SHORT" << std::endl;
+		if (input.size() > 3)
+		{
+			std::cout << "INPUT LENGTH TOO LONG" << std::endl;
+		}
+		else
+		{
+			rowChoice = std::stoi(input.substr(0, 2));
+			seatChoice = input[2];
+			seatChoice = toupper(seatChoice);
+		}
 	}
-	else if (input[2] != '\0')
+	else if (isdigit(input[0]))
 	{
-		std::cout << "INPUT LENGHT TOO LONG" << std::endl;
+		if (input.size() > 2)
+		{
+			std::cout << "INPUT LENGTH TOO LONG" << std::endl;
+		}
+		else
+		{
+			rowChoice = std::stoi(input.substr(0));
+			seatChoice = input[1];
+			seatChoice = toupper(seatChoice);
+		}
 	}
-	
+	//Check for row number within range.
+	if (!(rowChoice > 0 && rowChoice <= NROWS))
+	{
+		std::cout << "ROW OUT OF RANGE" << std::endl;
+		rowChoice = -1;
+	}
+
+	//Check for column out of range.
+	if (seatChoice != 'A' && seatChoice != 'B' && seatChoice != 'C' && seatChoice != 'D')
+	{
+		std::cout << "IVALID SEAT LETTER" << std::endl;
+		rowChoice = -1;
+	}
+
+	if (seatChoice == 'A')
+	{
+		colChoice = 0;
+	}
+	else if (seatChoice == 'B')
+	{
+		colChoice = 1;
+	}
+	else if (seatChoice == 'C')
+	{
+		colChoice = 2;
+	}
+	else if (seatChoice == 'D')
+	{
+		colChoice = 3;
+	}
+
+	if (seatChoice != -1)
+	{
+		if (seatArray[rowChoice - 1][colChoice] != 'X')
+		{
+			seatArray[rowChoice - 1][colChoice] = 'X';
+		}
+	}
+
+	//Debug statement to check rowChoice.
+	std::cout << rowChoice << std::endl;
+	std::cout << seatChoice << std::endl;
+	std::cout << colChoice << std::endl;
+
 /*
 	//Outer loop iterates through rows with formatting.
 	for (int i = 0; i < NROWS; i++)
