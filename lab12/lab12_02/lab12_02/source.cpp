@@ -14,7 +14,11 @@ int main()
 	fraction f2(4, 10);
 	
 	//Test ADDITION operator overload.
-	fraction f3 = f1 + f2;
+	fraction f3 = f2 + f1;
+	f3.simplify();
+	f3.print();
+	std::cout << std::endl;
+	f3 = f1;
 	f3.simplify();
 	f3.print();
 	

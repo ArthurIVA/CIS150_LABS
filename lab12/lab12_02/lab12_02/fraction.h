@@ -31,10 +31,11 @@ public:
 		}
 		else
 		{
-			this->numerator = secondOperand.denominator;
-			secondOperand.numerator = this->denominator;
-			result.numerator = this->numerator + secondOperand.numerator;
-			result.denominator = this->denominator * secondOperand.denominator;	
+			int num1 = this->numerator, num2 = secondOperand.numerator;
+			num1 *= secondOperand.denominator;
+			num2 *= this->denominator;
+			result.numerator = num1 + num2;
+			result.denominator = this->denominator * secondOperand.denominator;
 		}
 
 		return result;
@@ -51,9 +52,10 @@ public:
 		}
 		else
 		{
-			this->numerator = secondOperand.denominator;
-			secondOperand.numerator = this->denominator;
-			result.numerator = this->numerator - secondOperand.numerator;
+			int num1 = this->numerator, num2 = secondOperand.numerator;
+			num1 *= secondOperand.denominator;
+			num2 *= this->denominator;
+			result.numerator = num1 - num2;
 			result.denominator = this->denominator * secondOperand.denominator;
 		}
 
@@ -113,18 +115,11 @@ public:
 		return result;
 	}
 
-	//OPERATOR NOT FUNCTIONING CORRECTLY
-	/*
-	fraction operator= (fraction &secondOperand)
+	void operator= (fraction &secondOperand)
 	{
-		fraction result;
-
-		result.numerator = secondOperand.numerator;
-		result.denominator = secondOperand.denominator;
-
-		return result;
+		this->numerator = secondOperand.numerator;
+		this->denominator = secondOperand.denominator;
 	}
-	*/
 
 	~fraction();
 };
