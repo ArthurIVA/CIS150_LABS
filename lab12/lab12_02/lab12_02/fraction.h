@@ -11,42 +11,16 @@ private:
 
 public:
 	fraction();
-
 	fraction(int, int);
 
-	int getNumerator()
-	{
-		return numerator;
-	}
+	//Function Prototypes
+	int getNumerator();
+	int getDenominator();
+	void print();
+	void simplify();
 
-	int getDenominator()
-	{
-		return denominator;
-	}
-	
-	void print()
-	{
-		std::cout << numerator << "/" << denominator;
-	}
-
-	void simplify()
-	{
-		int divisor = 0;
-		while (divisor != 1)
-		{
-			for (int i = 1; i < 9; i++)
-			{
-				if (numerator % i == 0 && denominator % i == 0)
-				{
-					divisor = i;
-				}
-			}
-
-			numerator = numerator / divisor;
-			denominator = denominator / divisor;
-		}
-	}
-
+	//Operator OVERLOADING
+	// + ADDITION
 	fraction operator+ (fraction &secondOperand)
 	{
 		fraction result;
@@ -55,7 +29,6 @@ public:
 			result.numerator = this->numerator + secondOperand.numerator;
 			result.denominator = this->denominator;
 		}
-
 		else
 		{
 			this->numerator = secondOperand.denominator;
@@ -67,6 +40,7 @@ public:
 		return result;
 	}
 
+	// - SUBTRACTION
 	fraction operator- (fraction &secondOperand)
 	{
 		fraction result;
@@ -75,7 +49,6 @@ public:
 			result.numerator = this->numerator - secondOperand.numerator;
 			result.denominator = this->denominator;
 		}
-
 		else
 		{
 			this->numerator = secondOperand.denominator;
@@ -87,6 +60,7 @@ public:
 		return result;
 	}
 
+	// < LESS THAN
 	bool operator< (fraction &secondOperand)
 	{
 		double val1, val2;
@@ -100,6 +74,7 @@ public:
 			return false;
 	}
 
+	// > GREATER THAN
 	bool operator> (fraction &secondOperand)
 	{
 		double val1, val2;
@@ -107,10 +82,13 @@ public:
 		val2 = (double)secondOperand.numerator / (double)secondOperand.denominator;
 
 		if (val1 > val2)
+		{
 			return true;
-
+		}
 		else
+		{
 			return false;
+		}
 	}
 
 	bool operator== (fraction &secondOperand)
@@ -135,13 +113,18 @@ public:
 		return result;
 	}
 
-	void operator= (fraction &secondOperand)
+	//OPERATOR NOT FUNCTIONING CORRECTLY
+	/*
+	fraction operator= (fraction &secondOperand)
 	{
-		fraction *result = this;
+		fraction result;
 
-		result->numerator = secondOperand.numerator;
-		result->denominator = secondOperand.denominator;
+		result.numerator = secondOperand.numerator;
+		result.denominator = secondOperand.denominator;
+
+		return result;
 	}
+	*/
 
 	~fraction();
 };
