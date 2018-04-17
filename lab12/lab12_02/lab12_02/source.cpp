@@ -13,41 +13,46 @@ int main()
 	fraction f1(1, 5);
 	fraction f2(4, 10);
 	
+	f1.print();
+	std::cout << std::endl;
+	f2.print();
+	std::cout << std::endl << std::endl;
+
 	//Test ADDITION operator overload.
+	/*
 	fraction f3 = f2 + f1;
 	f3.simplify();
 	f3.print();
-	std::cout << std::endl;
-	f3 = f1;
-	f3.simplify();
-	f3.print();
+	*/
 	
-	/*
+	
 	//Test SUBTRACTION operator overload.
+	/*
 	fraction f3 = f1 - f2;
 	f3.simplify();
 	f3.print();
 	*/
 
-	/*
+	
 	//Test MULTIPLICATION operator overload.
+	/*
 	fraction f3 = f1 * f2;
 	f3.simplify();
 	f3.print();
 	*/
 
 	//Test LESS THAN operator overload.
-	//std::cout << std::endl << (f1 < f2) << std::endl;
+	//std::cout << (f1 < f2);
 
 	//Test GREATER THAN operator overload.
-	//std::cout << (f1 > f2) << std::endl;
+	//std::cout << (f1 > f2);
 
-	//OPERATOR NOT FUNCTIONING CORRECTLY
 	//Test = SET operator overload.
+	std::cout << std::endl;
 	/*
-	f1 = f2;
-	f1.simplify();
-	f1.print();
+	fraction f3 = f1;
+	f3.simplify();
+	f3.print();
 	*/
 
 	std::cout << std::endl;
