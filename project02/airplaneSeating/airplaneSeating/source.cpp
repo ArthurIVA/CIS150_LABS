@@ -23,6 +23,9 @@ void saveSeatChart(char[][NCOLS], int, std::ofstream&);
 void printSeatChart(char[][NCOLS], int);
 void reserveSeat(char[][NCOLS], int);
 void cancelSeat(char[][NCOLS], char[][NCOLS], int);
+void printStats(char[][NCOLS], char[][NCOLS], int);
+void helpMessage();
+void exitMessage();
 double verifyNum(std::string, bool);
 
 
@@ -93,13 +96,20 @@ int main()
 			std::cout << std::endl;
 			break;
 		case 5:
-			 
+			std::cout << std::endl;
+			printStats(seatChart, defaultSeatChart, NROWS);
+			std::cout << std::endl;
 			break;
 		case 6:
-
+			std::cout << std::endl;
+			helpMessage();
+			std::cout << std::endl;
 			break;
 		default:
 			//If selection is anything other than a valid choice or EXIT.
+			std::cout << std::endl;
+			exitMessage();
+			std::cout << std::endl;
 			break;
 		}
 
@@ -268,11 +278,6 @@ void reserveSeat(char seatArray[][NCOLS], int NROWS)
 			seatArray[rowChoice - 1][colChoice] = 'X';
 		}
 	}
-
-	//Debug statement to check rowChoice.
-	std::cout << rowChoice << std::endl;
-	std::cout << seatChoice << std::endl;
-	std::cout << colChoice << std::endl;
 }
 
 /*
@@ -360,12 +365,6 @@ void cancelSeat(char seatArray[][NCOLS], char defaultSeatArray[][NCOLS], int NRO
 			seatArray[rowChoice - 1][colChoice] = defaultSeatArray[rowChoice - 1][colChoice];
 		}
 	}
-
-	//Debug statement to check rowChoice.
-	std::cout << rowChoice << std::endl;
-	std::cout << seatChoice << std::endl;
-	std::cout << colChoice << std::endl;
-
 }
 
 /*
@@ -378,7 +377,7 @@ void saveSeatChart(char seatArray[][NCOLS], int NROWS, std::ofstream& out)
 {
 	std::string fileName = "";
 
-	std::cout << "Please enter output filename, including '.txt' [seat.txt]" << std::endl;
+	std::cout << "Please enter output filename, including '.txt'. Choosing [chartIn.txt] will change the default loaded file." << std::endl;
 	std::cout << "Filename: ";
 
 	std::cin >> fileName;
@@ -404,6 +403,118 @@ void saveSeatChart(char seatArray[][NCOLS], int NROWS, std::ofstream& out)
 	std::cout << "File has been saved to " << fileName << std::endl;
 }
 
+/*
+Function Author: Arthur Aigeltinger IV
+Creation Date:		04/19/18
+Modification Date:	04/19/18
+Purpose: Displays stats of current flight to user.
+*/
+void printStats(char seatArray[][NCOLS], char defaultSeatArray[][NCOLS], int NROWS)
+{
+	//Declare local variables.
+	int seatsAvailable = 0;
+	int windowSeatsAvailable = 0;
+	int aisleSeatsAvailable = 0;
+	int seatsTotal = (NROWS * NCOLS);
+
+	//Count all seats available.
+	//Outer loop iterates through rows with formatting.
+	for (int i = 0; i < NROWS; i++)
+	{
+		//Inner loop iterates through sub-columns of seat rows.
+		for (int j = 0; j < NCOLS; j++)
+		{
+			//Check for general seat availability.
+			if (seatArray[i][j] == defaultSeatArray[i][j])
+			{
+				seatsAvailable++;
+			}
+			//Check for window seat availability.
+			if (seatArray[i][j] == 'A' || seatArray[i][j] == 'D')
+			{
+				windowSeatsAvailable++;
+			}
+			if (seatArray[i][j] == 'B' || seatArray[i][j] == 'C')
+			{
+				aisleSeatsAvailable++;
+			}
+		}
+	}
+
+	std::cout << std::endl << "----------------CURRENT FLIGHT STATISTICS----------------" << std::endl << std::endl;
+
+	//Print Number of available seats.
+
+	std::cout << "\t Seats Available : " << seatsAvailable << std::endl;
+
+	//Percentage of seats already reserved.
+
+	std::cout << "\t Seats Reserved : " << (float)(100 * (((float)seatsTotal - (float)seatsAvailable) / (float)seatsTotal)) << "%" << std::endl;
+
+	//List of window seats available.
+
+	std::cout << "\t Window Seats Available : " << windowSeatsAvailable << std::endl;
+
+	//List of aisle seats available.
+
+	std::cout << "\t Aisle Seats Available : " << aisleSeatsAvailable << std::endl;
+
+}
+
+/*
+Function Author: Arthur Aigeltinger IV
+Creation Date:		04/19/18
+Modification Date:	04/19/18
+Purpose: Displays helpful hints to the user as well as redraws the menu.
+*/
+void helpMessage()
+{
+	system("CLS");
+
+	std::cout << "-------------------------HELP----------------------------" << std::endl << std::endl;
+	std::cout << "\t 1. Display Seat Chart" << std::endl;
+	std::cout << "This will show you the current chart of booked and unbooked seats for this flight." << std::endl;
+	std::cout << "Booked seats are identified by the 'X' in place of the normal seat letter." << std::endl;
+	std::cout << "" << std::endl;
+	std::cout << "\t 2. Reserve Seat" << std::endl;
+	std::cout << "Picking this option will give you the opportunity to input a seat you would like to reserve." << std::endl;
+	std::cout << "The format to input the desired seat is [Row Number][Seat Letter]. Examples - 1B, 10C, 4D, 5A, etc." << std::endl;
+	std::cout << "" << std::endl;
+	std::cout << "\t 3. Cancel Reservation" << std::endl;
+	std::cout << "Conversely to reservation, this will give you the opportunity to input a seat to cancel." << std::endl;
+	std::cout << "The format to input the desired seat is [Row Number][Seat Letter]. Examples - 1B, 10C, 4D, 5A, etc." << std::endl;
+	std::cout << "" << std::endl;
+	std::cout << "\t 4. Save Seat Chart to File" << std::endl;
+	std::cout << "This option will ask you for a given filename to save the current seat chart to." << std::endl;
+	std::cout << "" << std::endl;
+	std::cout << "\t 5. Statistics" << std::endl;
+	std::cout << "Select this option to see current stats about the loaded flight." << std::endl;
+	std::cout << "Stats Including - Seats Available, Window Seats, Aisle Seats, and percentage of seats booked." << std::endl;
+	std::cout << "" << std::endl;
+	std::cout << "\t 6. Help" << std::endl;
+	std::cout << "Hopefully you know this one... Because you're already here!" << std::endl;
+	std::cout << "" << std::endl;
+	std::cout << "\t 7. Quit" << std::endl;
+	std::cout << "Recieve our complementary good tidings!" << std::endl;
+	std::cout << "" << std::endl;
+	std::cout << "---------------------------------------------------------" << std::endl;
+
+	system("PAUSE");
+	system("CLS");
+
+	drawMenu();
+}
+
+/*
+Function Author: Arthur Aigeltinger IV
+Creation Date:		04/19/18
+Modification Date:	04/19/18
+Purpose: Displays thank you and exit message before program termination.
+*/
+void exitMessage()
+{
+	std::cout << "Thank you for booking with Air CIS! We hope you like the airline food..." << std::endl;
+}
 
 /*
 *Function Author: Arthur Aigeltinger IV
