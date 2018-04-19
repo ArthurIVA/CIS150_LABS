@@ -214,7 +214,12 @@ void reserveSeat(char seatArray[][NCOLS], int NROWS)
 	std::cin >> input;
 
 	//Check input lengths and type validity.
-	if (isdigit(input[0]) && isdigit(input[1]))
+	if (input.size() < 2)
+	{
+		std::cout << "INPUT LENGTH TOO SHORT" << std::endl;
+		return;
+	}
+	else if (isdigit(input[0]) && isdigit(input[1]))
 	{
 		if (input.size() > 3)
 		{
@@ -301,7 +306,12 @@ void cancelSeat(char seatArray[][NCOLS], char defaultSeatArray[][NCOLS], int NRO
 	std::cin >> input;
 
 	//Check input lengths and type validity.
-	if (isdigit(input[0]) && isdigit(input[1]))
+	if (input.size() < 2)
+	{
+		std::cout << "INPUT LENGTH TOO SHORT" << std::endl;
+		return;
+	}
+	else if (isdigit(input[0]) && isdigit(input[1]))
 	{
 		if (input.size() > 3)
 		{
