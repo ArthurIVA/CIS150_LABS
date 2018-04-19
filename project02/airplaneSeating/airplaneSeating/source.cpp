@@ -11,7 +11,7 @@ Purpose: Simulate a seat booking system for a small passenger airplane with 10 r
 #include <iostream>
 #include <string>
 
-//Constants
+//Global Constants
 const int NROWS = 10;
 const int NCOLS = 4;
 const int EXITCHOICE = 7;
@@ -19,8 +19,10 @@ const int EXITCHOICE = 7;
 //Function Prototypes
 void drawMenu();
 void loadSeatChart(char[][NCOLS], int, std::ifstream&);
+void saveSeatChart(char[][NCOLS], int, std::ofstream&);
 void printSeatChart(char[][NCOLS], int);
 void reserveSeat(char[][NCOLS], int);
+void cancelSeat(char[][NCOLS], char[][NCOLS], int);
 double verifyNum(std::string, bool);
 
 
@@ -30,20 +32,28 @@ int main()
 	std::string userIn = "";
 	int userChoice = 0;
 	
-
 	//Delcare Input Streams and Accompanying Arrays
 	std::ifstream inputDefault;
 	std::ifstream inputCurrent;
 	char defaultSeatChart[NROWS][NCOLS];
 	char seatChart[NROWS][NCOLS];
 
+	//Declare Output Stream.
+	std::ofstream outputCurrent;
+
 	//Open above input streams to appropriate text files.
 	inputDefault.open("chartInTemplate.txt");
 	inputCurrent.open("chartIn.txt");
 
+	//Fill current seat chart as well at template seat chart.
 	loadSeatChart(defaultSeatChart, NROWS, inputDefault);
 	loadSeatChart(seatChart, NROWS, inputCurrent);
 
+	//Explicity close input files when arrays are filled.
+	inputDefault.close();
+	inputCurrent.close();
+
+	//WILL REMOVE THESE STATEMENTS
 	//Debug Print Statements
 	//Un-comment to see state of template and current seat chart.
 	//printSeatChart(defaultSeatChart, NROWS);
@@ -73,10 +83,14 @@ int main()
 			std::cout << std::endl;
 			break;
 		case 3:
-
+			std::cout << std::endl;
+			cancelSeat(seatChart, defaultSeatChart, NROWS);
+			std::cout << std::endl;
 			break;
 		case 4:
-
+			std::cout << std::endl;
+			saveSeatChart(seatChart, NROWS, outputCurrent);
+			std::cout << std::endl;
 			break;
 		case 5:
 			 
@@ -97,7 +111,86 @@ int main()
 
 //Functions
 
+/*
+Function Author: Arthur Aigeltinger IV
+Creation Date:		04/15/18
+Modification Date:	04/15/18
+Purpose: Provide template for menu using string literals within std::cout statements.
+*/
+void drawMenu()
+{
+	std::cout << "------------------------ Menu ---------------------------" << std::endl;
+	std::cout << "" << std::endl;
+	std::cout << "\t 1. Display Seat Chart" << std::endl;
+	std::cout << "\t 2. Reserve Seat" << std::endl;
+	std::cout << "\t 3. Cancel Reservation" << std::endl;
+	std::cout << "\t 4. Save Seat Chart to File" << std::endl;
+	std::cout << "\t 5. Statistics" << std::endl;
+	std::cout << "\t 6. Help" << std::endl;
+	std::cout << "\t 7. Quit" << std::endl;
+	std::cout << "" << std::endl;
+	std::cout << "---------------------------------------------------------" << std::endl;
+}
 
+/*
+Function Author: Arthur Aigeltinger IV
+Creation Date:		04/10/18
+Modification Date:	04/15/18
+Purpose: Take in a given array and an input stream to fill it for manipulation.
+*/
+void loadSeatChart(char seatArray[][NCOLS], int NROWS, std::ifstream& in)
+{
+	//Variable exists to deal with integers within the seat chart that character array cannot handle.
+	//Possibility of struct to make this unnecessary?
+	//Determined that since integers in this case are always finite and in order with array that this will be left un-changed.
+	int numCache;
+
+	//Continue until end of file.
+	while (!in.eof())
+	{
+		//Outer loop iterates through rows and discards integer into numCache.
+		for (int i = 0; i < NROWS; i++)
+
+		{
+			in >> numCache;
+
+			//Inner loop iterates through sub-columns of seat rows.
+			for (int j = 0; j < NCOLS; j++)
+			{
+				in >> seatArray[i][j];
+			}
+		}
+	}
+}
+
+/*
+Function Author: Arthur Aigeltinger IV
+Creation Date:		04/10/18
+Modification Date:	04/15/18
+Purpose: Take in a given seat array and then print it to the console.
+*/
+void printSeatChart(char seatArray[][NCOLS], int NROWS)
+{
+	//Outer loop iterates through rows with formatting.
+	for (int i = 0; i < NROWS; i++)
+	{
+		std::cout << std::setw(3) << std::left << i + 1;
+
+		//Inner loop iterates through sub-columns of seat rows.
+		for (int j = 0; j < NCOLS; j++)
+		{
+			std::cout << seatArray[i][j];
+		}
+		std::cout << std::endl;
+	}
+}
+
+/*
+Function Author: Arthur Aigeltinger IV
+Creation Date:		04/10/18
+Modification Date:	04/15/18
+Purpose: Parse an input string and use that to reserve a seat on seatArray[].
+*/
 void reserveSeat(char seatArray[][NCOLS], int NROWS)
 {
 	//Define input and choice variables
@@ -180,18 +273,222 @@ void reserveSeat(char seatArray[][NCOLS], int NROWS)
 	std::cout << rowChoice << std::endl;
 	std::cout << seatChoice << std::endl;
 	std::cout << colChoice << std::endl;
+}
 
 /*
-	//Outer loop iterates through rows with formatting.
-	for (int i = 0; i < NROWS; i++)
+Function Author: Arthur Aigeltinger IV
+Creation Date:		04/19/18
+Modification Date:	04/19/18
+Purpose: Parse an input string and use that to cancel a seat on seatArray[].
+Also realizing in hindsight that this and the reserveSeat() function could be consolidated.
+Just include a BOOL to be passed which would change the single comparative statement at the end of the function.
+*/
+void cancelSeat(char seatArray[][NCOLS], char defaultSeatArray[][NCOLS], int NROWS)
+{
+	//Define input and choice variables
+	std::string input = "";
+	int rowChoice = -1; //When rowChoice is -1, seat is invalid.
+	int colChoice;
+	char seatChoice = ' ';
+
+	//Query for input.
+	std::cout << "Please Enter Seat to Cancel [1A, 4C, 6D, etc]: ";
+	std::cin >> input;
+
+	//Check input lengths and type validity.
+	if (isdigit(input[0]) && isdigit(input[1]))
 	{
-		std::cout << std::setw(3) << std::left << i + 1;
+		if (input.size() > 3)
+		{
+			std::cout << "INPUT LENGTH TOO LONG" << std::endl;
+		}
+		else
+		{
+			rowChoice = std::stoi(input.substr(0, 2));
+			seatChoice = input[2];
+			seatChoice = toupper(seatChoice);
+		}
+	}
+	else if (isdigit(input[0]))
+	{
+		if (input.size() > 2)
+		{
+			std::cout << "INPUT LENGTH TOO LONG" << std::endl;
+		}
+		else
+		{
+			rowChoice = std::stoi(input.substr(0));
+			seatChoice = input[1];
+			seatChoice = toupper(seatChoice);
+		}
+	}
+	//Check for row number within range.
+	if (!(rowChoice > 0 && rowChoice <= NROWS))
+	{
+		std::cout << "ROW OUT OF RANGE" << std::endl;
+		rowChoice = -1;
+	}
+
+	//Check for column out of range.
+	if (seatChoice != 'A' && seatChoice != 'B' && seatChoice != 'C' && seatChoice != 'D')
+	{
+		std::cout << "IVALID SEAT LETTER" << std::endl;
+		rowChoice = -1;
+	}
+
+	if (seatChoice == 'A')
+	{
+		colChoice = 0;
+	}
+	else if (seatChoice == 'B')
+	{
+		colChoice = 1;
+	}
+	else if (seatChoice == 'C')
+	{
+		colChoice = 2;
+	}
+	else if (seatChoice == 'D')
+	{
+		colChoice = 3;
+	}
+
+	if (seatChoice != -1)
+	{
+		if (seatArray[rowChoice - 1][colChoice] != defaultSeatArray[rowChoice - 1][colChoice])
+		{
+			seatArray[rowChoice - 1][colChoice] = defaultSeatArray[rowChoice - 1][colChoice];
+		}
+	}
+
+	//Debug statement to check rowChoice.
+	std::cout << rowChoice << std::endl;
+	std::cout << seatChoice << std::endl;
+	std::cout << colChoice << std::endl;
+
+}
+
+/*
+Function Author: Arthur Aigeltinger IV
+Creation Date:		04/19/18
+Modification Date:	04/19/18
+Purpose: Save current seat chart to file.
+*/
+void saveSeatChart(char seatArray[][NCOLS], int NROWS, std::ofstream& out)
+{
+	std::string fileName = "";
+
+	std::cout << "Please enter output filename, including '.txt' [seat.txt]" << std::endl;
+	std::cout << "Filename: ";
+
+	std::cin >> fileName;
+
+	out.open(fileName);
+
+	//Continue until array.
+	for(int rowCount = 1; rowCount <= 10; rowCount++)
+	{
+		out << std::left << std::fixed << std::setw(4) << rowCount;
 
 		//Inner loop iterates through sub-columns of seat rows.
 		for (int j = 0; j < NCOLS; j++)
 		{
-			std::cout << seatArray[i][j];
+			out << std::left << std::fixed << std::setw(3) << seatArray[rowCount - 1][j];
 		}
-		std::cout << std::endl;
+		out << std::endl;
+	}
+
+	//Explicitly close output file.
+	out.close();
+
+	std::cout << "File has been saved to " << fileName << std::endl;
+}
+
+
+/*
+*Function Author: Arthur Aigeltinger IV
+*Creation Date:		03/12/18
+*Modification Date:	04/15/18
+*Purpose: Checks for valid integer input OR double/int input via string.
+*Dependencies: #include <cctype>, #include <string>
+*
+//Original Example of verifyNum()
+std::string input = "";
+int num = 0;
+std::cout << "Please enter an integer value: ";
+std::cin >> input;
+std::cout << std::endl;
+num = verifyNum(input, true);
 */
+double verifyNum(std::string val, bool isDouble)	//If isDouble is TRUE function checks for a double, instead of int.
+{
+	std::string input = val;			//Create string and assign it to argument string value so it can be changed in subroutines below IF user enters new value for the string.
+	bool isValid = true;		//Condition to specify whether the input is registered as valid (i.e. double or int). Default = TRUE.
+	bool foundDecimal = false;	//Declare boolean to determine if decimal is present.
+	int i = 0;					//Iterator for the individual characters of the string.
+
+	do  //Perform loop at least once. While the input is not a valid string or double, repeat the loop.
+	{
+		isValid = true;
+		i = 0;
+
+		if (isDouble == false)	//If we're checking for an integer, we run through this conditional to verify if all of our characters are digits.
+		{
+			while (input[i] != '\0') //While the iterator has not reached end of the string ('\0' specifies the end delimiter of the string).
+			{
+				if (!isdigit(input[i]))	//If letter in the current index of the iterator isn't a digit, do this.
+				{
+					std::cout << "Please Enter Your Choice (1-7): ";	//User inputs a new value for our local variable INPUT, breaks back out to initial do-while loop.
+					isValid = false;
+					std::cin >> input;
+					break;
+				}
+
+				i++;
+			}
+		}
+		else if (isDouble == true)
+		{
+			/*
+			* WHILE:
+			* While the iterator has not reached end of the string ('\0' specifies the end delimiter of the string)
+			* Do this.
+			*/
+			while (input[i] != '\0')
+			{
+				/*
+				* IF:
+				* The letter in the current index of the iterator isn't a digit NOR is it a decimal
+				* OR
+				* The letter in the current index of the iterator is a decimal and found a decimal previously
+				* Do this.
+				*/
+				if ((!isdigit(input[i]) && input[i] != '.') || (input[i] == '.' && foundDecimal == true))
+				{
+					std::cout << "Please Enter Your Choice (1-7) : "; //User inputs a new value for our local variable INPUT, breaks back out to initial do-while loop.
+					isValid = false;
+					std::cin >> input;
+
+					break;
+				}
+
+				else if (input[i] == '.')	//If decimal found, set foundDecimal to true.
+				{
+					foundDecimal = true;
+				}
+
+				i++;
+			}
+		}
+	} while (isValid == false); //If number NOT valid, repeat do-while loop.
+
+	if (isDouble == true)	//If valid double, output the input casted to a double.
+	{
+		return stod(input);
+	}
+
+	else   //If valid integer, output the input casted to a integer.
+	{
+		return stoi(input);
+	}
 }
