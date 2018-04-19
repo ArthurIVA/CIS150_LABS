@@ -107,13 +107,14 @@ int main()
 			break;
 		default:
 			//If selection is anything other than a valid choice or EXIT.
-			std::cout << std::endl;
-			exitMessage();
-			std::cout << std::endl;
 			break;
 		}
 
 	} while (userChoice != EXITCHOICE);
+
+	std::cout << std::endl;
+	exitMessage();
+	std::cout << std::endl;
 
 	system("pause");
 	return 0;
@@ -224,6 +225,7 @@ void reserveSeat(char seatArray[][NCOLS], int NROWS)
 		if (input.size() > 3)
 		{
 			std::cout << "INPUT LENGTH TOO LONG" << std::endl;
+			return;
 		}
 		else
 		{
@@ -237,6 +239,7 @@ void reserveSeat(char seatArray[][NCOLS], int NROWS)
 		if (input.size() > 2)
 		{
 			std::cout << "INPUT LENGTH TOO LONG" << std::endl;
+			return;
 		}
 		else
 		{
@@ -249,6 +252,7 @@ void reserveSeat(char seatArray[][NCOLS], int NROWS)
 	if (!(rowChoice > 0 && rowChoice <= NROWS))
 	{
 		std::cout << "ROW OUT OF RANGE" << std::endl;
+		return;
 		rowChoice = -1;
 	}
 
@@ -256,6 +260,7 @@ void reserveSeat(char seatArray[][NCOLS], int NROWS)
 	if (seatChoice != 'A' && seatChoice != 'B' && seatChoice != 'C' && seatChoice != 'D')
 	{
 		std::cout << "IVALID SEAT LETTER" << std::endl;
+		return;
 		rowChoice = -1;
 	}
 
@@ -281,6 +286,15 @@ void reserveSeat(char seatArray[][NCOLS], int NROWS)
 		if (seatArray[rowChoice - 1][colChoice] != 'X')
 		{
 			seatArray[rowChoice - 1][colChoice] = 'X';
+			std::cout << "Seat has been reserved" << std::endl;
+		}
+		else if (seatArray[rowChoice - 1][colChoice] = 'X')
+		{
+			std::cout << "Seat already reserved, please select another." << std::endl;
+		}
+		else
+		{
+			std::cout << "INVALID SEAT" << std::endl;
 		}
 	}
 }
@@ -316,6 +330,7 @@ void cancelSeat(char seatArray[][NCOLS], char defaultSeatArray[][NCOLS], int NRO
 		if (input.size() > 3)
 		{
 			std::cout << "INPUT LENGTH TOO LONG" << std::endl;
+			return;
 		}
 		else
 		{
@@ -329,6 +344,7 @@ void cancelSeat(char seatArray[][NCOLS], char defaultSeatArray[][NCOLS], int NRO
 		if (input.size() > 2)
 		{
 			std::cout << "INPUT LENGTH TOO LONG" << std::endl;
+
 		}
 		else
 		{
@@ -341,6 +357,7 @@ void cancelSeat(char seatArray[][NCOLS], char defaultSeatArray[][NCOLS], int NRO
 	if (!(rowChoice > 0 && rowChoice <= NROWS))
 	{
 		std::cout << "ROW OUT OF RANGE" << std::endl;
+		return;
 		rowChoice = -1;
 	}
 
@@ -348,6 +365,7 @@ void cancelSeat(char seatArray[][NCOLS], char defaultSeatArray[][NCOLS], int NRO
 	if (seatChoice != 'A' && seatChoice != 'B' && seatChoice != 'C' && seatChoice != 'D')
 	{
 		std::cout << "IVALID SEAT LETTER" << std::endl;
+		return;
 		rowChoice = -1;
 	}
 
@@ -373,6 +391,11 @@ void cancelSeat(char seatArray[][NCOLS], char defaultSeatArray[][NCOLS], int NRO
 		if (seatArray[rowChoice - 1][colChoice] != defaultSeatArray[rowChoice - 1][colChoice])
 		{
 			seatArray[rowChoice - 1][colChoice] = defaultSeatArray[rowChoice - 1][colChoice];
+			std::cout << "Seat has been canceled." << std::endl;
+		}
+		else
+		{
+			std::cout << "That seat is available you goof! Try again." << std::endl;
 		}
 	}
 }
